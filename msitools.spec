@@ -6,13 +6,12 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.91
+Version:	0.92
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/0.91/%{name}-%{version}.tar.xz
-# Source0-md5:	bec9d9d884213309605528846f7549af
-Patch0:		%{name}-link.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/0.92/%{name}-%{version}.tar.xz
+# Source0-md5:	d8a1297bcef600684e3a11a594d0ef4f
 URL:		https://live.gnome.org/msitools
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
@@ -96,7 +95,6 @@ Bashowe dopełnianie poleceń dla narzędzi MSI (msiinfo oraz msibuild).
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -119,13 +117,17 @@ rm -rf $RPM_BUILD_ROOT
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libmsi.la
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README TODO
 %attr(755,root,root) %{_bindir}/msibuild
+%attr(755,root,root) %{_bindir}/msidiff
+%attr(755,root,root) %{_bindir}/msidump
 %attr(755,root,root) %{_bindir}/msiextract
 %attr(755,root,root) %{_bindir}/msiinfo
 %attr(755,root,root) %{_bindir}/wixl
