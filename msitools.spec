@@ -86,6 +86,9 @@ Summary(pl.UTF-8):	Bashowe dopełnianie poleceń dla narzędzi MSI
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n bash-completion-msitools
 Bash completion for MSI tools (msiinfo and msibuild).
