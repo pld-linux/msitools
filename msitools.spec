@@ -16,7 +16,7 @@ URL:		https://live.gnome.org/msitools
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
 BuildRequires:	gcab-devel >= 0.1.10
-BuildRequires:	gettext-devel >= 0.18
+BuildRequires:	gettext-tools >= 0.18
 BuildRequires:	glib2-devel >= 1:2.23.0
 BuildRequires:	gobject-introspection-devel >= 0.9.4
 BuildRequires:	intltool >= 0.35
