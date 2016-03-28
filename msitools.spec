@@ -2,12 +2,12 @@
 # Conditional build:
 %bcond_without	static_libs	# static library
 %bcond_without	vala		# Vala API
-#
+
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
 Version:	0.95
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/0.95/%{name}-%{version}.tar.xz
@@ -24,6 +24,7 @@ BuildRequires:	libgsf-devel
 BuildRequires:	libtool
 BuildRequires:	libuuid-devel >= 1.41.3
 BuildRequires:	libxml2-devel >= 1:2.7
+BuildRequires:	rpmbuild(macros) >= 1.673
 BuildRequires:	tar >= 1:1.22
 %{?with_vala:BuildRequires:	vala >= 2:0.16}
 BuildRequires:	xz
@@ -73,6 +74,9 @@ Summary(pl.UTF-8):	API języka Vala do biblioteki MSI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n vala-libmsi
 Vala API for MSI library.
@@ -164,4 +168,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n bash-completion-msitools
 %defattr(644,root,root,755)
-%{_datadir}/bash-completion/completions/msitools
+%{bash_compdir}/msitools
