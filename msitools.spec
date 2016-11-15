@@ -9,7 +9,7 @@ Name:		msitools
 Version:	0.96
 Release:	1
 License:	LGPL v2.1+
-Group:		Applications
+Group:		Applications/File
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/0.96/%{name}-%{version}.tar.xz
 # Source0-md5:	8500f2d0448caf2fefcca17bb26c9268
 URL:		https://live.gnome.org/msitools
