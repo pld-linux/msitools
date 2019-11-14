@@ -6,12 +6,12 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.99
+Version:	0.100
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications/File
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	88d4800014a02e110b77e90b7382f58a
+# Source0-md5:	ddba9a5bf2a8f0a5b4238bf6b9aca59d
 URL:		https://wiki.gnome.org/msitools
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
@@ -137,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS README TODO
+%doc AUTHORS NEWS README.md TODO
 %attr(755,root,root) %{_bindir}/msibuild
 %attr(755,root,root) %{_bindir}/msidiff
 %attr(755,root,root) %{_bindir}/msidump
