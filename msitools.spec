@@ -6,28 +6,28 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.100
+Version:	0.101
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications/File
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/msitools/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	ddba9a5bf2a8f0a5b4238bf6b9aca59d
+Source0:	https://download.gnome.org/sources/msitools/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	ab3cfee1b8b7bdf805e93f0cfd2c2031
+Patch0:		%{name}-wixl-headers.patch
 URL:		https://wiki.gnome.org/msitools
-BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	gcab-devel >= 0.1.10
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.23.0
 BuildRequires:	gobject-introspection-devel >= 0.9.4
-BuildRequires:	intltool >= 0.35
 BuildRequires:	libgsf-devel
-BuildRequires:	libtool
-BuildRequires:	libuuid-devel >= 1.41.3
 BuildRequires:	libxml2-devel >= 1:2.7
-BuildRequires:	rpmbuild(macros) >= 1.673
+BuildRequires:	meson >= 0.52
+BuildRequires:	ninja >= 1.5
+BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
-%{?with_vala:BuildRequires:	vala >= 2:0.16}
+BuildRequires:	vala >= 2:0.16
+BuildRequires:	vala-gcab >= 0.1.10
 BuildRequires:	xz
 Requires:	gcab >= 0.1.10
 Requires:	glib2 >= 1:2.23.0
@@ -77,9 +77,7 @@ Summary(pl.UTF-8):	API języka Vala do biblioteki MSI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description -n vala-libmsi
 Vala API for MSI library.
@@ -93,9 +91,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie poleceń dla narzędzi MSI
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description -n bash-completion-msitools
 Bash completion for MSI tools (msiinfo and msibuild).
@@ -105,27 +101,21 @@ Bashowe dopełnianie poleceń dla narzędzi MSI (msiinfo oraz msibuild).
 
 %prep
 %setup -q
+%patch0 -p1
+
+%if %{with static_libs}
+%{__sed} -i '/^libmsi =/ s/shared_library/library/' libmsi/meson.build
+%endif
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--enable-fast-install \
-	--disable-silent-rules \
-	%{!?with_static_libs:--disable-static}
-%{__make}
+%meson build
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-# obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libmsi.la
+%ninja_install -C build
 
 %find_lang %{name}
 
@@ -166,6 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with vala}
 %files -n vala-libmsi
 %defattr(644,root,root,755)
+%{_datadir}/vala/vapi/libmsi-1.0.deps
 %{_datadir}/vala/vapi/libmsi-1.0.vapi
 %endif
 
