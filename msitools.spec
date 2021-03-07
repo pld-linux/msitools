@@ -77,7 +77,7 @@ Summary(pl.UTF-8):	API języka Vala do biblioteki MSI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n vala-libmsi
 Vala API for MSI library.
@@ -91,7 +91,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie poleceń dla narzędzi MSI
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n bash-completion-msitools
 Bash completion for MSI tools (msiinfo and msibuild).
