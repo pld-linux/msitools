@@ -6,13 +6,12 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.101
+Version:	0.102
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications/File
 Source0:	https://download.gnome.org/sources/msitools/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	ab3cfee1b8b7bdf805e93f0cfd2c2031
-Patch0:		%{name}-wixl-headers.patch
+# Source0-md5:	c773d25de403fefa896613ab26b59c84
 URL:		https://wiki.gnome.org/msitools
 BuildRequires:	bison
 BuildRequires:	gcab-devel >= 0.1.10
@@ -101,11 +100,12 @@ Bashowe dopełnianie poleceń dla narzędzi MSI (msiinfo oraz msibuild).
 
 %prep
 %setup -q
-%patch0 -p1
 
 %if %{with static_libs}
 %{__sed} -i '/^libmsi =/ s/shared_library/library/' libmsi/meson.build
 %endif
+
+%{__sed} -i -e '1s,/usr/bin/env bash,/bin/bash,' tools/{msidiff,msidump}.in
 
 %build
 %meson build
