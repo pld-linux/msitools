@@ -6,12 +6,12 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.102
+Version:	0.103
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications/File
 Source0:	https://download.gnome.org/sources/msitools/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	c773d25de403fefa896613ab26b59c84
+# Source0-md5:	e43ae2f121ef65c67744b15e79471692
 URL:		https://wiki.gnome.org/msitools
 BuildRequires:	bison
 BuildRequires:	gcab-devel >= 0.1.10
@@ -135,14 +135,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/msiinfo
 %attr(755,root,root) %{_bindir}/wixl
 %attr(755,root,root) %{_bindir}/wixl-heat
-%attr(755,root,root) %{_libdir}/libmsi.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmsi.so.0
+%attr(755,root,root) %{_libdir}/libmsi-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmsi-1.0.so.0
 %{_libdir}/girepository-1.0/Libmsi-1.0.typelib
 %{_datadir}/wixl-%{version}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libmsi.so
+%attr(755,root,root) %{_libdir}/libmsi-1.0.so
 %{_includedir}/libmsi-1.0
 %{_datadir}/gir-1.0/Libmsi-1.0.gir
 %{_pkgconfigdir}/libmsi-1.0.pc
@@ -150,7 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libmsi.a
+%{_libdir}/libmsi-1.0.a
 %endif
 
 %if %{with vala}
