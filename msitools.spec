@@ -6,12 +6,12 @@
 Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
-Version:	0.103
+Version:	0.106
 Release:	1
 License:	LGPL v2.1+
 Group:		Applications/File
 Source0:	https://download.gnome.org/sources/msitools/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	e43ae2f121ef65c67744b15e79471692
+# Source0-md5:	92655a98f60ac7a5d7c5f6fa06541e54
 URL:		https://wiki.gnome.org/msitools
 BuildRequires:	bison
 BuildRequires:	gcab-devel >= 0.1.10
@@ -20,9 +20,9 @@ BuildRequires:	glib2-devel >= 1:2.23.0
 BuildRequires:	gobject-introspection-devel >= 0.9.4
 BuildRequires:	libgsf-devel
 BuildRequires:	libxml2-devel >= 1:2.7
-BuildRequires:	meson >= 0.52
+BuildRequires:	meson >= 1.4
 BuildRequires:	ninja >= 1.5
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.16
@@ -108,14 +108,14 @@ Bashowe dopełnianie poleceń dla narzędzi MSI (msiinfo oraz msibuild).
 %{__sed} -i -e '1s,/usr/bin/env bash,/bin/bash,' tools/{msidiff,msidump}.in
 
 %build
-%meson build
+%meson
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %find_lang %{name}
 
