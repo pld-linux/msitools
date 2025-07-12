@@ -7,7 +7,7 @@ Summary:	MSI manipulation library and tools
 Summary(pl.UTF-8):	Biblioteka i narzędzia do obróbki plików MSI
 Name:		msitools
 Version:	0.106
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Applications/File
 Source0:	https://download.gnome.org/sources/msitools/%{version}/%{name}-%{version}.tar.xz
